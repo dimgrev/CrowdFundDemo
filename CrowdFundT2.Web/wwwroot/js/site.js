@@ -98,7 +98,48 @@ let btn = $('#js-submit-client-create').on('click', () => {
     let lastname = $('.js-lastname').val();
     let email = $('.js-email').val();
     let phone = $('.js-phone').val();
-    debugger;
+
+    /*Data Validation */
+    if (firstname == '') {
+        dangerAlert.css('margin-top', '10px');
+        dangerAlert.css('text-align', 'center');
+        dangerAlert.html('Name is empty');
+        dangerAlert.show().delay(2000);
+        dangerAlert.fadeOut();
+        return false;
+    }
+    if (lastname == '') {
+        dangerAlert.css('margin-top', '10px');
+        dangerAlert.css('text-align', 'center');
+        dangerAlert.html('Lastname is empty');
+        dangerAlert.show().delay(2000);
+        dangerAlert.fadeOut();
+        return false;
+    }
+    if (email == '') {
+        dangerAlert.css('margin-top', '10px');
+        dangerAlert.css('text-align', 'center');
+        dangerAlert.html('Email is empty');
+        dangerAlert.show().delay(2000);
+        dangerAlert.fadeOut();
+        return false;
+    }
+    if (IsEmail(email) == false) {
+        dangerAlert.css('margin-top', '10px');
+        dangerAlert.css('text-align', 'center');
+        dangerAlert.html('Email not valid');
+        dangerAlert.show().delay(2000);
+        dangerAlert.fadeOut();
+        return false;
+    }
+    if (phone == '') {
+        dangerAlert.css('margin-top', '10px');
+        dangerAlert.css('text-align', 'center');
+        dangerAlert.html('Phone is empty');
+        dangerAlert.show().delay(2000);
+        dangerAlert.fadeOut();
+        return false;
+    }
     /*Phone Validation */
     var filter = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
     if (!filter.test(phone)) {
@@ -108,6 +149,7 @@ let btn = $('#js-submit-client-create').on('click', () => {
         dangerAlert.show().delay(2000);
         dangerAlert.fadeOut();
     }
+    // Ajax call..
     else {
         let data = {
             firstname: firstname,
@@ -138,6 +180,15 @@ let btn = $('#js-submit-client-create').on('click', () => {
         });
     }
 });
+
+function IsEmail(email) {
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if (!regex.test(email)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 
 /* Create Project */
