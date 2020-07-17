@@ -98,36 +98,45 @@ let btn = $('#js-submit-client-create').on('click', () => {
     let lastname = $('.js-lastname').val();
     let email = $('.js-email').val();
     let phone = $('.js-phone').val();
-    
-
-    let data = {
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        phone: phone
-    }
-
-    $.ajax({
-        type: 'Post',
-        url: '/Client/Create/',
-        contentType: 'application/json',
-        data: JSON.stringify(data)
-    }).done(client => {
-        successAlert.css('margin-top', '10px');
-        successAlert.css('text-align', 'center');
-        successAlert.show().delay(2000);
-        successAlert.fadeOut();
-        setTimeout(function () {
-            window.location.assign("/Client/");
-        }, 3000);
-    }).fail(failureResponse => {
+    debugger;
+    /*Phone Validation */
+    var filter = /([0-9]{10})|(\([0-9]{3}\)\s+[0-9]{3}\-[0-9]{4})/;
+    if (!filter.test(phone)) {
         dangerAlert.css('margin-top', '10px');
         dangerAlert.css('text-align', 'center');
-        dangerAlert.html(failureResponse.responseText);
+        dangerAlert.html('Phone not valid');
         dangerAlert.show().delay(2000);
         dangerAlert.fadeOut();
-    });
+    }
+    else {
+        let data = {
+            firstname: firstname,
+            lastname: lastname,
+            email: email,
+            phone: phone
+        }
 
+        $.ajax({
+            type: 'Post',
+            url: '/Client/Create/',
+            contentType: 'application/json',
+            data: JSON.stringify(data)
+        }).done(client => {
+            successAlert.css('margin-top', '10px');
+            successAlert.css('text-align', 'center');
+            successAlert.show().delay(2000);
+            successAlert.fadeOut();
+            setTimeout(function () {
+                window.location.assign("/Client/");
+            }, 3000);
+        }).fail(failureResponse => {
+            dangerAlert.css('margin-top', '10px');
+            dangerAlert.css('text-align', 'center');
+            dangerAlert.html(failureResponse.responseText);
+            dangerAlert.show().delay(2000);
+            dangerAlert.fadeOut();
+        });
+    }
 });
 
 

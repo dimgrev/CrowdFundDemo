@@ -9,7 +9,9 @@ namespace CrowdFundT2.Core.Data
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Server=localhost;Database=CrowdFundT2Db;User Id=sa;Password=qwer!@#$1234;");
+            //optionsBuilder.UseSqlServer("Server=localhost;Database=CrowdFundT2Db;User Id=sa;Password=qwer!@#$1234;");
+            optionsBuilder.UseSqlServer("Server=tcp:dimgrevus.database.windows.net,1433;Initial Catalog=TinyCrm.Web_db;Persist Security Info=False;" +
+                "User ID=dimgrev;Password=77java&&;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             //optionsBuilder.UseSqlServer("Server=localhost;Database=CrowdFundT2Db;User Id=sa;Password=admin!@#123;");
         }
 

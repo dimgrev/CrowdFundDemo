@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace CrowdFundT2.Core.Model
 {
@@ -37,6 +38,15 @@ namespace CrowdFundT2.Core.Model
             }
         }
 
-        
+        //Check Phone Validation
+        public static bool IsValidPhone(string phone)
+        {
+            if (phone != null)
+            {
+                string MatchPhoneNumberPattern = "^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+                return Regex.IsMatch(phone, MatchPhoneNumberPattern);
+            }
+            return false;
+        }
     }
 }

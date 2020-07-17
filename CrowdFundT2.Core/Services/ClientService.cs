@@ -28,12 +28,12 @@ namespace CrowdFundT2.Core.Services
             {
                 return ApiResult<Client>.Failed(StatusCode.BadRequest, "Firstname is empty");
             }
-            
+
             if (string.IsNullOrWhiteSpace(options.Lastname))
             {
                 return ApiResult<Client>.Failed(StatusCode.BadRequest, "Lastname is empty");
             }
-            
+
             if (string.IsNullOrWhiteSpace(options.Email))
             {
                 return ApiResult<Client>.Failed(StatusCode.BadRequest, "Email is empty");
@@ -43,7 +43,12 @@ namespace CrowdFundT2.Core.Services
             {
                 return ApiResult<Client>.Failed(StatusCode.BadRequest, "Email not valid");
             }
- 
+
+            if (!Client.IsValidPhone(options.Phone))
+            {
+                return ApiResult<Client>.Failed(StatusCode.BadRequest, "Phone not valid");
+            }
+
             if (string.IsNullOrWhiteSpace(options.Phone))
             {
                 return ApiResult<Client>.Failed(StatusCode.BadRequest, "Phone is empty");
@@ -58,7 +63,7 @@ namespace CrowdFundT2.Core.Services
                 Email = options.Email,
                 Phone = options.Phone,
                 IsActive = true
-                
+
             };
 
             context_.Add(client);

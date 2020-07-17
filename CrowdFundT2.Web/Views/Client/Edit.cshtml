@@ -40,7 +40,7 @@
         @Html.ValidationMessageFor(m => m.Phone)
     </div>
     <div class="form-group form-check client-form-group">
-        <input type="checkbox" class="form-check-input" id="DisableClientCheckBox">
+        <input type="checkbox" class="form-check-input" id="DisableClientCheckBox" @(Model.IsActive ? "" : "checked=\"true\"")>
         <label class="form-check-label" for="exampleCheck1">Disable</label>
     </div>
     <button type="button" id="js-submit-customer-edit" class="btn btn-primary">Submit</button>
